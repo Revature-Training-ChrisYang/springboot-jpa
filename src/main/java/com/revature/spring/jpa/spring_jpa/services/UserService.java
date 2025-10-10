@@ -1,5 +1,7 @@
 package com.revature.spring.jpa.spring_jpa.services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.revature.spring.jpa.spring_jpa.models.User;
@@ -19,5 +21,9 @@ public class UserService {
 
     public User getUserById(Long id) {
         return userRepository.findById(id).orElseThrow();
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }
