@@ -29,12 +29,16 @@ public class UserService {
 
     public User updateUser(Long id, User user) {
         User existingUser = getUserById(id);
-        
+
         existingUser.setFirstName(user.getFirstName());
         existingUser.setLastName(user.getLastName());
         existingUser.setEmail(user.getEmail());
         existingUser.setPassword(user.getPassword());
 
         return userRepository.save(existingUser);
+    }
+
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
     }
 }
