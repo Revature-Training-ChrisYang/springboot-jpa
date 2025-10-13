@@ -23,6 +23,10 @@ public class UserService {
         return userRepository.findById(id).orElseThrow();
     }
 
+    public List<User> getUserByLastName(String lastName) {
+        return userRepository.findByLastName(lastName);
+    }
+
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
