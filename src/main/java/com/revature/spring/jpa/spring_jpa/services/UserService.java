@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.revature.spring.jpa.spring_jpa.exception.UserNotFoundException;
 import com.revature.spring.jpa.spring_jpa.models.User;
 import com.revature.spring.jpa.spring_jpa.repositories.UserRepository;
 
@@ -20,7 +21,9 @@ public class UserService {
     }
 
     public User getUserById(Long id) {
-        return userRepository.findById(id).orElseThrow();
+        return userRepository.findById(id).orElseThrow(
+            () -> new UserNotFoundException("User with ID " + id + " not found")
+        );
     }
 
     public List<User> getUserByLastName(String lastName) {
