@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +16,7 @@ import com.revature.spring.jpa.spring_jpa.models.User;
 import com.revature.spring.jpa.spring_jpa.services.UserService;
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
     private UserService userService;
 
@@ -22,17 +24,17 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/user")
+    @PostMapping
     public User createUserAccount(@RequestBody User user) {
         return userService.createUser(user);
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/{id}")
     public User getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 
-    @GetMapping("/user")
+    @GetMapping
     public List<User> getUserByLastName(@RequestParam(defaultValue = "") String lastName) {
          return userService.getUserByLastName(lastName);
     }
@@ -42,12 +44,12 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @PatchMapping("/user/{id}")
+    @PatchMapping("/{id}")
     public User updateUser(@PathVariable Long id, @RequestBody User user) {
         return userService.updateUser(id, user);
     }
 
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
     }
