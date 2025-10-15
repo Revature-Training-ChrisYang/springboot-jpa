@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.spring.jpa.spring_jpa.models.User;
 import com.revature.spring.jpa.spring_jpa.services.UserService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -25,7 +27,7 @@ public class UserController {
     }
 
     @PostMapping
-    public User createUserAccount(@RequestBody User user) {
+    public User createUserAccount(@Valid @RequestBody User user) {
         return userService.createUser(user);
     }
 
@@ -45,7 +47,7 @@ public class UserController {
     }
 
     @PatchMapping("/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User user) {
+    public User updateUser(@PathVariable Long id, @Valid @RequestBody User user) {
         return userService.updateUser(id, user);
     }
 
