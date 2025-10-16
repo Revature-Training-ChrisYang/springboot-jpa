@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.revature.spring.jpa.spring_jpa.exception.EmailAlreadyExistsException;
 import com.revature.spring.jpa.spring_jpa.exception.UserNotFoundException;
 import com.revature.spring.jpa.spring_jpa.models.User;
 import com.revature.spring.jpa.spring_jpa.repositories.UserRepository;
@@ -17,7 +18,12 @@ public class UserService {
     }
 
     public User createUser(User user) {
-        return userRepository.save(user);
+        if (userRepository.existsByEmail(user.getEmail())) {
+            throw new EmailAlreadyExistsException("Email " + user.getEmail() + " already exists!");
+        }
+        else {
+            return userRepository.save(user);
+        }
     }
 
     public User getUserById(Long id) {
@@ -28,6 +34,11 @@ public class UserService {
 
     public List<User> getUserByLastName(String lastName) {
         return userRepository.findByLastName(lastName);
+    }
+
+    public User getUserByEmail(String email)
+    {
+        return userRepository.findByEmail(email);
     }
 
     public List<User> getAllUsers() {
@@ -48,5 +59,9 @@ public class UserService {
     public void deleteUser(Long id) {
         User existingUser = getUserById(id);
         userRepository.delete(existingUser);
+    }
+
+    public void deleteAllUser() {
+        userRepository.deleteAll();
     }
 }

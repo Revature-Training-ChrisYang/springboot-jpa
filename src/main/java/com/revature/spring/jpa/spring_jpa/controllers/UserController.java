@@ -36,9 +36,14 @@ public class UserController {
         return userService.getUserById(id);
     }
 
+    // @GetMapping
+    // public List<User> getUserByLastName(@RequestParam(defaultValue = "") String lastName) {
+    //      return userService.getUserByLastName(lastName);
+    // }
+
     @GetMapping
-    public List<User> getUserByLastName(@RequestParam(defaultValue = "") String lastName) {
-         return userService.getUserByLastName(lastName);
+    public User getUserByEmail(@RequestParam(defaultValue = "") User user) {
+        return userService.getUserByEmail(user.getEmail());
     }
 
     @GetMapping("/users")
@@ -54,5 +59,11 @@ public class UserController {
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
+    }
+
+    @DeleteMapping("/users")
+    public void deletsAllUsers()
+    {
+        userService.deleteAllUser();
     }
 }

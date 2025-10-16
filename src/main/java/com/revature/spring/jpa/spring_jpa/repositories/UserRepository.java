@@ -10,4 +10,6 @@ import com.revature.spring.jpa.spring_jpa.models.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findByLastName(String lastName);
+    boolean existsByEmail(String email);
+    User findByEmail(String email);
 }
